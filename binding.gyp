@@ -30,7 +30,10 @@
             '-framework ApplicationServices',
             '-framework OpenGL'
           ]
-        }
+        },
+        'sources': [
+          'src/clip_osx.mm'
+        ]
       }],
       
       ['OS == "linux"', {
@@ -42,12 +45,16 @@
         },
         
         'sources': [
-          'src/xdisplay.c'
+          'src/xdisplay.c',
+          'src/clip_linux.cc'
         ]
       }],
 
       ["OS=='win'", {
-        'defines': ['IS_WINDOWS']
+        'defines': ['IS_WINDOWS'],
+        'sources': [
+          'src/clip_win.cc'
+        ]
       }]
     ],
     

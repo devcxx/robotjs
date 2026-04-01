@@ -5,6 +5,7 @@
 #include "keypress.h"
 #include "screen.h"
 #include "microsleep.h"
+#include "clip.h"
 #if defined(USE_X11)
 	#include "xdisplay.h"
 #endif
@@ -708,6 +709,27 @@ return env.Null();
 	return Napi::Number::New(env, 1);
 }
 
+Napi::Value readFilesWrapper(const Napi::CallbackInfo& info)
+{
+	Napi::Env env = info.Env();
+	return GetFileNames(env);
+}
+
+Napi::Value writeFilesWrapper(const Napi::CallbackInfo& info)
+{
+	Napi::Env env = info.Env();
+
+	if (info.Length() < 1 || !info[0].IsArray())
+	{
+		Napi::TypeError::New(env, "First argument must be an array of file paths.").ThrowAsJavaScriptException();
+		return env.Null();
+	}
+
+	Napi::Array files = info[0].As<Napi::Array>();
+	WriteFileNames(env, files);
+	return Napi::Number::New(env, 1);
+}
+
 Napi::Object InitAll(Napi::Env env, Napi::Object exports)
 {
 	exports.Set(Napi::String::New(env, "dragMouse"),
@@ -754,6 +776,12 @@ Napi::Object InitAll(Napi::Env env, Napi::Object exports)
 
 	exports.Set(Napi::String::New(env, "setKeyboardDelay"),
 				Napi::Function::New(env, setKeyboardDelayWrapper));
+
+	exports.Set(Napi::String::New(env, "readFiles"),
+				Napi::Function::New(env, readFilesWrapper));
+
+	exports.Set(Napi::String::New(env, "writeFiles"),
+				Napi::Function::New(env, writeFilesWrapper));
 
 	return exports;
 }

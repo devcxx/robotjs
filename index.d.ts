@@ -13,3 +13,5 @@ export function mouseToggle(down?: string, button?: string) : void
 export function dragMouse(x: number, y: number) : void
 export function scrollMouse(x: number, y: number) : void
 export function getMousePos(): { x: number, y: number }
+export function readFiles(): string[]
+export function writeFiles(filePaths: string[]): void
