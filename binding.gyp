@@ -36,8 +36,6 @@
       ['OS == "linux"', {
         'link_settings': {
           'libraries': [
-            '-lpng',
-            '-lz',
             '-lX11',
             '-lXtst'
           ]
@@ -60,9 +58,7 @@
       'src/keypress.c',
       'src/keycode.c',
       'src/screen.c',
-      'src/screengrab.c',
-      'src/snprintf.c',
-      'src/MMBitmap.c'
+      'src/snprintf.c'
     ]
   }]
 }

@@ -48,6 +48,8 @@
   },
   "homepage": "https://github.com/octalmage/robotjs",
   "dependencies": {
+    "electron": "^39.2.6",
+    "electron-rebuild": "^3.2.9",
     "node-addon-api": "^4.2.0",
     "prebuild-install": "^5.3.3"
   },
